@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d0y10g5j6iwbb"]
+
+[ext_resource type="Script" uid="uid://diwslr565xwg4" path="res://bricks/brick/brick_stats.gd" id="1_3bowq"]
+
+[resource]
+script = ExtResource("1_3bowq")

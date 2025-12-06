@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://t7e048txbqq"]
+
+[ext_resource type="Script" uid="uid://cvmeguvcsarn3" path="res://paddle/paddle.gd" id="1_wmxf4"]
+[ext_resource type="Texture2D" uid="uid://bcltp18heledi" path="res://paddle/art/paddle.png" id="2_abfxj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k4sr"]
+atlas = ExtResource("2_abfxj")
+region = Rect2(0, 0, 13, 82)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3j7n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k4sr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xrss6"]
+radius = 6.0
+height = 304.0
+
+[node name="Paddle" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_wmxf4")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5707964
+scale = Vector2(1, 3.776347)
+sprite_frames = SubResource("SpriteFrames_c3j7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_xrss6")
+
+[node name="HitStop" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="HitStop" to="." method="_on_hit_stop_timeout"]

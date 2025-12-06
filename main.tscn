@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://jlt77d8un4m6"]
+
+[ext_resource type="PackedScene" uid="uid://wlnalt0enpfs" path="res://wall.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://c3arr2135u626" path="res://ball/ball.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://t7e048txbqq" path="res://paddle/paddle.tscn" id="3_h2yge"]
+
+[node name="Main" type="Node"]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("1_ig7tw")]
+position = Vector2(-20, 370)
+scale = Vector2(32.293, 3.028)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("1_ig7tw")]
+position = Vector2(1304, 333)
+scale = Vector2(31.163, 3.388)
+
+[node name="Wall3" parent="Walls" instance=ExtResource("1_ig7tw")]
+position = Vector2(654, -39)
+rotation = 0.0
+scale = Vector2(19.713, 5.937)
+
+[node name="Wall4" parent="Walls" instance=ExtResource("1_ig7tw")]
+position = Vector2(651, 1315)
+rotation = 0.0
+scale = Vector2(18.863, 5.725)
+
+[node name="Ball" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(189, 128)
+gravity_multiplier = 0.6
+bounciness = 1.2
+curving_step = 0.4
+
+[node name="Paddle" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(649, 1165)

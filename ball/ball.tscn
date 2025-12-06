@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3arr2135u626"]
+
+[ext_resource type="Script" uid="uid://doqow408qbgym" path="res://ball/ball.gd" id="1_pwunn"]
+[ext_resource type="Texture2D" uid="uid://bt3b516emc0k3" path="res://ball/art/moon-16.png" id="2_biv8x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xd6y"]
+radius = 8.0
+
+[node name="Ball" type="CharacterBody2D"]
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_pwunn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_biv8x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6xd6y")
+
+[node name="CurvingTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CurvingTimer" to="." method="_on_curving_timer_timeout"]

@@ -1,1 +1,1 @@
-# dg-arcanoid
+# gd-arcanoid

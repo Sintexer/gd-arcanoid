@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://wlnalt0enpfs"]
+
+[ext_resource type="Texture2D" uid="uid://b7ilr1g3voxqk" path="res://bricks/brick/art/button-9.png" id="1_xxgf6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4f30"]
+radius = 7.0
+height = 90.26438
+
+[node name="Wall" type="StaticBody2D"]
+rotation = -1.5707964
+scale = Vector2(5.3930616, 3.1183014)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+scale = Vector2(0.9357149, 0.9084425)
+shape = SubResource("CapsuleShape2D_y4f30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xxgf6")
