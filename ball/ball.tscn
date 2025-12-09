@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3arr2135u626"]
+[gd_scene load_steps=6 format=3 uid="uid://c3arr2135u626"]
 
 [ext_resource type="Script" uid="uid://doqow408qbgym" path="res://ball/ball.gd" id="1_pwunn"]
 [ext_resource type="Texture2D" uid="uid://bt3b516emc0k3" path="res://ball/art/moon-16.png" id="2_biv8x"]
+[ext_resource type="AudioStream" uid="uid://b23q8uov1op5k" path="res://ball/audio/ball_hit_sound.wav" id="3_biv8x"]
+[ext_resource type="AudioStream" uid="uid://cor8db2bw8ahh" path="res://ball/audio/ball_curve_sound.wav" id="4_6xd6y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6xd6y"]
 radius = 8.0
@@ -21,5 +23,12 @@ shape = SubResource("CircleShape2D_6xd6y")
 
 [node name="CurvingTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_biv8x")
+
+[node name="Curve" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6xd6y")
+volume_db = -5.492
 
 [connection signal="timeout" from="CurvingTimer" to="." method="_on_curving_timer_timeout"]

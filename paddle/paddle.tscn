@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://t7e048txbqq"]
+[gd_scene load_steps=13 format=3 uid="uid://t7e048txbqq"]
 
 [ext_resource type="Script" uid="uid://cvmeguvcsarn3" path="res://paddle/paddle.gd" id="1_wmxf4"]
 [ext_resource type="Texture2D" uid="uid://bcltp18heledi" path="res://paddle/art/paddle.png" id="2_abfxj"]
+[ext_resource type="AudioStream" uid="uid://dhke3wyw25rym" path="res://paddle/audio/bump.ogg" id="3_1k4sr"]
+[ext_resource type="Script" uid="uid://bn55kyuviu0we" path="res://paddle/superhit_skill.gd" id="4_kpwfo"]
+[ext_resource type="Texture2D" uid="uid://cc5beyv3fm2hy" path="res://paddle/skill/superhit/superhit-area-32.png" id="5_eqsrp"]
+[ext_resource type="Texture2D" uid="uid://y1v7emu4t8xe" path="res://paddle/skill/superhit/arrow32-16.png" id="6_1mavf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1k4sr"]
 atlas = ExtResource("2_abfxj")
@@ -20,16 +24,44 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xrss6"]
 radius = 6.0
-height = 304.0
+height = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j36kq"]
+radius = 34.0147
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai3uu"]
+atlas = ExtResource("5_eqsrp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pgffq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai3uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai3uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai3uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai3uu")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Paddle" type="CharacterBody2D"]
-collision_layer = 3
 script = ExtResource("1_wmxf4")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -1.5707964
-scale = Vector2(1, 3.776347)
 sprite_frames = SubResource("SpriteFrames_c3j7n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,4 +72,32 @@ shape = SubResource("CapsuleShape2D_xrss6")
 wait_time = 0.2
 one_shot = true
 
+[node name="Bump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1k4sr")
+volume_db = -7.208
+
+[node name="SuperhitSkill" type="Node2D" parent="."]
+script = ExtResource("4_kpwfo")
+
+[node name="Area" type="Area2D" parent="SuperhitSkill"]
+position = Vector2(0, -17)
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SuperhitSkill/Area"]
+shape = SubResource("CircleShape2D_j36kq")
+
+[node name="Zone" type="AnimatedSprite2D" parent="SuperhitSkill"]
+modulate = Color(1, 1, 1, 0.5019608)
+position = Vector2(0, -17)
+sprite_frames = SubResource("SpriteFrames_pgffq")
+frame_progress = 0.14826475
+
+[node name="Arrow" type="Sprite2D" parent="SuperhitSkill"]
+position = Vector2(0, -6.5)
+rotation = -1.5707964
+texture = ExtResource("6_1mavf")
+offset = Vector2(16, 0.5)
+
 [connection signal="timeout" from="HitStop" to="." method="_on_hit_stop_timeout"]
+[connection signal="aiming" from="SuperhitSkill" to="." method="_on_superhit_skill_aiming"]
+[connection signal="used" from="SuperhitSkill" to="." method="_on_superhit_skill_used"]

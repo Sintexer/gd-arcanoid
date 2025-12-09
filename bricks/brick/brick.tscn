@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://btx4fhcjncxlk"]
+
+[ext_resource type="Script" uid="uid://cvvp8d65d1b1e" path="res://bricks/brick/brick.gd" id="1_147en"]
+[ext_resource type="Texture2D" uid="uid://b55ajljsietut" path="res://bricks/brick/art/brick-g-32-16.png" id="1_ccea7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccea7"]
+size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccea7"]
+atlas = ExtResource("1_ccea7")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_147en"]
+atlas = ExtResource("1_ccea7")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4etp"]
+atlas = ExtResource("1_ccea7")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkctr"]
+atlas = ExtResource("1_ccea7")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d4l8e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccea7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_147en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4etp")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dead",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkctr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Brick" type="StaticBody2D"]
+script = ExtResource("1_147en")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ccea7")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d4l8e")
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_sprite_2d_animation_finished"]
