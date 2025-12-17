@@ -50,7 +50,6 @@ func hit() -> void:
 	$Bump.play()
 	if hit_charges < MAX_HIT_CHARGES:
 		hit_charges += 1
-	print("Hit charges: " + str(hit_charges))
 	if (has_skill_charged()):
 		superhit_skill.enable()
 

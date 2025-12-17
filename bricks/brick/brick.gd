@@ -9,25 +9,22 @@ var dead: bool = false
 
 func _ready() -> void:
 	$Animation.play("default")
+	$ScoreReward.update(200)
 	hp = max_hp
 
 ## Returns percentage (float 0..1) of how much of the impulse should be left after hit
 func handle_hit(hit_impulse: Vector2) -> float:
 	var power: float = hit_impulse.length()
-	#print("hit_impulse_length=" + str(power))
 	var damage = power / POWER_TO_HP
-	#print("gamage=" + str(damage))
 	if (damage > hp):
-		#print("hp="+ str(hp))
 		die()
-		return clampf(1 - hp/damage, 0.001, 1)
+		return 0.7
 	else:
 		hp -= damage
-		#print("left hp="+ str(hp))
 		return 1 ## do not slow the ball on hit
 
 func die() -> void:
-	
+	$ScoreReward.activate()
 	$Animation.play("dead")
 	$CollisionShape2D.disabled = true
 	dead = true

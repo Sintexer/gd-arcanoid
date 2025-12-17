@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://o5pd71qnxcug"]
+
+[ext_resource type="Script" uid="uid://bgp7jkfsjhuqr" path="res://score.gd" id="1_t1x8i"]
+
+[node name="Score" type="Label"]
+offset_right = 134.0
+offset_bottom = 23.0
+text = "1000"
+horizontal_alignment = 3
+script = ExtResource("1_t1x8i")
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://btx4fhcjncxlk"]
+[gd_scene load_steps=10 format=3 uid="uid://btx4fhcjncxlk"]
 
 [ext_resource type="Script" uid="uid://cvvp8d65d1b1e" path="res://bricks/brick/brick.gd" id="1_147en"]
 [ext_resource type="Texture2D" uid="uid://b55ajljsietut" path="res://bricks/brick/art/brick-g-32-16.png" id="1_ccea7"]
+[ext_resource type="PackedScene" uid="uid://dhh4toyb2mbav" path="res://score_reward.tscn" id="3_r4etp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccea7"]
 size = Vector2(32, 16)
@@ -59,5 +60,7 @@ shape = SubResource("RectangleShape2D_ccea7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d4l8e")
+
+[node name="ScoreReward" parent="." instance=ExtResource("3_r4etp")]
 
 [connection signal="animation_finished" from="Animation" to="." method="_on_sprite_2d_animation_finished"]

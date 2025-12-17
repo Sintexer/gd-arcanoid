@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://jlt77d8un4m6"]
+[gd_scene load_steps=7 format=3 uid="uid://jlt77d8un4m6"]
 
 [ext_resource type="PackedScene" uid="uid://wlnalt0enpfs" path="res://wall.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cqvkbluprxj1b" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c3arr2135u626" path="res://ball/ball.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://t7e048txbqq" path="res://paddle/paddle.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://btx4fhcjncxlk" path="res://bricks/brick/brick.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://o5pd71qnxcug" path="res://score.tscn" id="6_7mycd"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_lquwl")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -30,11 +33,12 @@ scale = Vector2(10.633, 5.335)
 [node name="Ball" parent="." groups=["Ball"] instance=ExtResource("2_0xm2m")]
 position = Vector2(345, 40)
 gravity_multiplier = 0.6
+collision_damping = 0.9
 curving_step = 0.4
+impulse_saved_bounce_threshold = 0.6
 
 [node name="Paddle" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(301, 302)
-bounciness = 2.0
 
 [node name="Node" type="Node2D" parent="."]
 
@@ -97,3 +101,12 @@ position = Vector2(368, 88)
 
 [node name="Brick20" parent="Node" instance=ExtResource("4_1bvp3")]
 position = Vector2(400, 88)
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" parent="HUD" instance=ExtResource("6_7mycd")]
+layout_mode = 0
